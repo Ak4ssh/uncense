@@ -193,11 +193,14 @@ def load_local(path: str, sys_prompt: str, max_samples: int = None) -> list[dict
 
 
 def load_hf(name: str, split: str, sys_prompt: str,
-            max_samples: int = None) -> list[dict]:
+            max_samples: int = None, subset: str = None) -> list[dict]:
     from datasets import load_dataset
-    log.info(f"  HF     {name} [{split}] — loading up to {max_samples}...")
+    log.info(f"  HF     {name} [{subset or 'default'}] [{split}] — loading up to {max_samples}...")
     try:
-        ds = load_dataset(name, split=split, streaming=True)
+        if subset:
+            ds = load_dataset(name, subset, split=split, streaming=True)
+        else:
+            ds = load_dataset(name, split=split, streaming=True)
     except Exception as e:
         log.error(f"  Failed to load {name}: {e}")
         return []
@@ -229,7 +232,7 @@ def build_datasets(cfg: dict, tokenizer):
         elif src["type"] == "huggingface":
             all_examples += load_hf(
                 src["name"], src.get("split", "train"),
-                sys_prompt, src.get("max_samples"))
+                sys_prompt, src.get("max_samples"), src.get("subset"))
 
     # Fallback: old-style single train_file key
     if not all_examples and "train_file" in data_cfg:
