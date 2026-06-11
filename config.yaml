@@ -29,7 +29,7 @@ lora:
 
 # ── Training ─────────────────────────────────────────────────────────────────
 training:
-  epochs: 3
+  epochs: 1
   batch_size: 2
   grad_accumulation_steps: 8
   max_lr: 2.0e-4
@@ -55,7 +55,7 @@ data:
       name: "cognitivecomputations/dolphin"
       subset: "flan1m-alpaca-uncensored"
       split: "train"
-      max_samples: 50000
+      max_samples: 10000
       enabled: true
 
     # Uncensored chat pairs
