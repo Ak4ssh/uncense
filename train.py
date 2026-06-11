@@ -303,7 +303,7 @@ def build_trainer(cfg: dict, model, tokenizer, train_ds, val_ds):
         logging_steps               = t.get("logging_steps", 10),
         save_steps                  = t.get("save_steps", 100),
         save_total_limit            = 3,
-        evaluation_strategy         = "steps" if val_ds else "no",
+        eval_strategy               = "steps" if val_ds else "no",
         eval_steps                  = t.get("eval_steps", 100) if val_ds else None,
         load_best_model_at_end      = bool(val_ds),
         report_to                   = "wandb" if cfg.get("wandb", {}).get("enabled") else "none",
