@@ -11,7 +11,7 @@ model:
   # name: "Orenguteng/Llama-3.1-8B-Lexi-Uncensored-V2"   # Lexi uncensored
   # name: "NousResearch/Hermes-3-Llama-3.1-8B"           # Hermes 3
   # name: "unsloth/mistral-7b-v0.3-bnb-4bit"             # Mistral 7B base
-  max_seq_length: 4096
+  max_seq_length: 2048
 
 # ── LoRA ─────────────────────────────────────────────────────────────────────
 lora:
@@ -30,8 +30,8 @@ lora:
 # ── Training ─────────────────────────────────────────────────────────────────
 training:
   epochs: 3
-  batch_size: 4
-  grad_accumulation_steps: 4
+  batch_size: 2
+  grad_accumulation_steps: 8
   max_lr: 2.0e-4
   warmup_ratio: 0.05
   weight_decay: 0.01
